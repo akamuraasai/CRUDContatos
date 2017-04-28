@@ -1,5 +1,4 @@
 <?php
-
 $rotas->adiciona('GET', '/sobre', function () {
     return 'CRUD Contatos Versão 1.0.0.';
 });

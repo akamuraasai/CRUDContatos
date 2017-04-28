@@ -13,9 +13,10 @@ class ContatoController extends Controller
         $this->repo = new ContatoRepository();
     }
 
-    public function index()
+    static public function index()
     {
-        return 'Pagina Inicial.';
+        include(__DIR__ .'/../../resources/views/contatos/index.php');
+        return '';
     }
 
     public function lista()

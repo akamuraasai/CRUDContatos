@@ -21,9 +21,9 @@
         "post-update-cmd": [
             "App\\Database\\Migrations\\BaseMigration::up",
             "App\\Database\\Seeders\\BaseSeed::make_seed"
-        ]
+        ],
+        "run": "cd public/ && php -S localhost:8000 index.php"
     },
     "minimum-stability": "dev",
-    "require": {
-    }
+    "require": {}
 }
