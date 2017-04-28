@@ -7,21 +7,21 @@ use App\Kernel\Database;
 class BaseSeed extends Database
 {
     private $nomes = [
-        'Aaron', 'Adriano', 'Alan', 'Alexandre', 'Alonso', 'Anderson', 'Andres', 'Antônio', 'Benjamin', 'Bruno', 'Camilo', 'Carlos', 'Christian',
-        'Christopher', 'Cristóvão', 'Daniel', 'Dante', 'David', 'Diego', 'Eduardo', 'Elias', 'Emanuel', 'Emiliano', 'Emílio', 'Estêvão',
-        'Evandro', 'Everton', 'Felipe', 'Fernando', 'Francisco', 'Franco', 'Fábio', 'Gabriel', 'Gian', 'Guilherme', 'Gustavo', 'Henrique',
-        'Hernani', 'Horácio', 'Hugo', 'Ian', 'Inácio', 'Isaac', 'Ivan', 'Jerônimo', 'Joaquin', 'Jorge', 'Josué', 'José',
-        'João', 'Kevin', 'Leandro', 'Leonardo', 'Lucas', 'Luciano', 'Luis', 'Manuel', 'Mateus', 'Matias', 'Miguel', 'Mário',
-        'Máximo', 'Noel', 'Pablo', 'Paulo', 'Pedro', 'Rafael', 'Ricardo', 'Rodrigo', 'Samuel', 'Santiago', 'Simon', 'Sérgio',
-        'Thales', 'Thiago', 'Tomás', 'Valentin', 'Vicente', 'Agostinho', 'Demian', 'Giovane', 'Jácomo', 'Martinho', 'Maximiano', 'Natal', 'Sebastião',
-        'Simão', 'Teobaldo', 'Ziraldo', 'Abril', 'Adriana', 'Agustina', 'Alessandra', 'Alexa', 'Allison', 'Alma', 'Amanda', 'Amélia',
+        'Aaron', 'Adriano', 'Alan', 'Alexandre', 'Alonso', 'Anderson', 'Andres', 'Antonio', 'Benjamin', 'Bruno', 'Camilo', 'Carlos', 'Christian',
+        'Christopher', 'Daniel', 'Dante', 'David', 'Diego', 'Eduardo', 'Elias', 'Emanuel', 'Emiliano', 'Emilio', 'Estevan',
+        'Evandro', 'Everton', 'Felipe', 'Fernando', 'Francisco', 'Franco', 'Fabio', 'Gabriel', 'Gian', 'Guilherme', 'Gustavo', 'Henrique',
+        'Hernani', 'Horacio', 'Hugo', 'Ian', 'Inacio', 'Isaac', 'Ivan', 'Jeronimo', 'Joaquin', 'Jorge', 'Josue', 'Jose',
+        'Kevin', 'Leandro', 'Leonardo', 'Lucas', 'Luciano', 'Luis', 'Manuel', 'Mateus', 'Matias', 'Miguel', 'Mario',
+        'Maximo', 'Noel', 'Pablo', 'Paulo', 'Pedro', 'Rafael', 'Ricardo', 'Rodrigo', 'Samuel', 'Santiago', 'Simon', 'Sergio',
+        'Thales', 'Thiago', 'Tomas', 'Valentin', 'Vicente', 'Agostinho', 'Demian', 'Giovane', 'Jacomo', 'Martinho', 'Maximiano', 'Natal',
+        'Teobaldo', 'Ziraldo', 'Abril', 'Adriana', 'Agustina', 'Alessandra', 'Alexa', 'Allison', 'Alma', 'Amanda', 'Amelia',
         'Ana', 'Andrea', 'Antonieta', 'Ariadna', 'Ariana', 'Ashley', 'Beatriz', 'Bianca', 'Camila', 'Carla', 'Carolina', 'Catarina',
         'Clara', 'Daniela', 'Elizabeth', 'Emília', 'Fabiana', 'Fátima', 'Gabriela', 'Giovana', 'Helena', 'Irene', 'Isabel', 'Isabella',
-        'Isadora', 'Ivana', 'Jasmin', 'Joana', 'Josefina', 'Juliana', 'Julieta', 'Júlia', 'Ketlin', 'Laura', 'Luana', 'Luara', 'Luciana', 'Luna',
-        'Luzia', 'Madalena', 'Maitê', 'Malena', 'Manuela', 'Mariana', 'Mel', 'Melissa', 'Mia', 'Micaela', 'Michele', 'Miranda', 'Natália', 'Nicole',
-        'Noelí', 'Norma', 'Nádia', 'Olívia', 'Ornela', 'Paula', 'Paulina', 'Pâmela', 'Rafaela', 'Rebeca', 'Regina', 'Renata',
-        'Sabrina', 'Salomé', 'Samanta', 'Sara', 'Silvana', 'Sofia', 'Sophie', 'Suzana', 'Taís', 'Tábata', 'Valentina', 'Valéria',
-        'Violeta', 'Vitória', 'Abgail', 'Constância', 'Hortência', 'Tessália', 'Thalissa'
+        'Isadora', 'Ivana', 'Jasmin', 'Joana', 'Josefina', 'Juliana', 'Julieta', 'Julia', 'Ketlin', 'Laura', 'Luana', 'Luara', 'Luciana', 'Luna',
+        'Luzia', 'Madalena', 'Maite', 'Malena', 'Manuela', 'Mariana', 'Mel', 'Melissa', 'Mia', 'Micaela', 'Michele', 'Miranda', 'Natalia', 'Nicole',
+        'Noeli', 'Norma', 'Nadia', 'Olivia', 'Ornela', 'Paula', 'Paulina', 'Pamela', 'Rafaela', 'Rebeca', 'Regina', 'Renata',
+        'Sabrina', 'Samanta', 'Sara', 'Silvana', 'Sofia', 'Sophie', 'Suzana', 'Tais', 'Tabata', 'Valentina', 'Valeria',
+        'Violeta', 'Vitoria', 'Abgail', 'Constancia', 'Hortencia', 'Tessalia', 'Thalissa'
     ];
 
     private $sobrenomes = [
@@ -70,7 +70,16 @@ class BaseSeed extends Database
         $retorno = [];
         foreach ($tipos as $tipo) {
             if ($tipo === 'nome')
-                $retorno[] = $this->nomes[mt_rand(0, count($this->nomes))] . ' ' . $this->sobrenomes[mt_rand(0, count($this->sobrenomes))];
+                $retorno[] = $this->nomes[mt_rand(0, count($this->nomes) -1)] . ' ' . $this->sobrenomes[mt_rand(0, count($this->sobrenomes) -1)];
+
+            else if ($tipo === 'num2')
+                $retorno[] = mt_rand(1, 2);
+
+            else if ($tipo === 'id')
+                $retorno[] = mt_rand(1, 15);
+
+            else if ($tipo === 'email')
+                $retorno[] = strtolower($this->nomes[mt_rand(0, count($this->nomes) -1)]) . '@mail.com.br';
         }
 
         return $retorno;
@@ -79,7 +88,9 @@ class BaseSeed extends Database
     static public function make_seed()
     {
         $contatos = new ContatoSeeder();
+        $emails = new EmailSeeder();
 
         $contatos->contato_seed();
+        $emails->email_seed();
     }
 }

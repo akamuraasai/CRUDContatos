@@ -2,30 +2,25 @@
 
 namespace App\Controllers;
 
-use App\Models\Contato;
-use App\Repositories\ContatoRepository;
+use App\Models\Email;
+use App\Repositories\EmailRepository;
 
-class ContatoController extends Controller
+class EmailController extends Controller
 {
     public function __construct()
     {
-        $this->model = new Contato();
-        $this->repo = new ContatoRepository();
-    }
-
-    public function index()
-    {
-        return 'Pagina Inicial.';
+        $this->model = new Email();
+        $this->repo = new EmailRepository();
     }
 
     public function lista()
     {
-        return $this->repo->listar_contatos();
+        return $this->repo->listar_emails();
     }
 
     public function busca_id($id)
     {
-        return $this->repo->buscar_contato_por_id($id);
+        return $this->repo->buscar_email_por_id($id);
     }
 
     public function salva($request = null)
@@ -35,11 +30,13 @@ class ContatoController extends Controller
             return json_encode($valida['erros']);
 
         if (isset($request['id']))
-            $model = Contato::buscar_por_id($request['id']);
+            $model = Email::buscar_por_id($request['id']);
         else
-            $model = new Contato();
+            $model = new Email();
 
-        $model->nome = $request['nome'];
+        $model->email = $request['email'];
+        $model->tipo = $request['tipo'];
+        $model->contato_id = $request['contato_id'];
 
         return $model->salvar();
     }
@@ -50,7 +47,7 @@ class ContatoController extends Controller
             return json_encode(['resultado' => false, 'mensagem' => 'Execução incorreta do método.']);
 
         if (isset($request['id']))
-            $model = Contato::buscar_por_id($request['id']);
+            $model = Email::buscar_por_id($request['id']);
         else
             return json_encode(['resultado' => false, 'mensagem' => 'Execução do método com parametros incorretos.']);
 

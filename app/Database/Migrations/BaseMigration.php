@@ -41,14 +41,18 @@ class BaseMigration extends Database
     static public function up()
     {
         $contatos = new ContatoTable();
+        $emails = new EmailTable();
 
         echo "\033[0;32mTabela Contatos: " . $contatos->criar_tabela_contato() . "\033[0m\n";
+        echo "\033[0;32mTabela E-mails: " . $emails->criar_tabela_emails() . "\033[0m\n";
     }
 
     static public function down()
     {
         $contatos = new ContatoTable();
+        $emails = new EmailTable();
 
         echo "\033[0;31mTabela Contatos: " . $contatos->remover_tabela_contato() . "\033[0m\n";
+        echo "\033[0;31mTabela Contatos: " . $emails->remover_tabela_emails() . "\033[0m\n";
     }
 }
