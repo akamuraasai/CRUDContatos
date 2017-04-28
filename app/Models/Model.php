@@ -4,14 +4,9 @@ namespace App\Models;
 
 class Model
 {
+    protected $validacoes;
     protected $campos;
-
-    public function __construct()
-    {
-        $this->campos = [
-            ['nome' => 'teste', 'requerido' => true, 'min' => 6, 'max' => 12]
-        ];
-    }
+    protected $repo;
 
     public function valida_request($request)
     {
@@ -19,7 +14,7 @@ class Model
             return ['resultado' => false, 'erros' => ['Requisição mal formatada. Tente novamente.']];
 
         $erros = [];
-        foreach ($this->campos as $campo) {
+        foreach ($this->validacoes as $campo) {
             $resultado = $this->valida_campo($campo, $request);
             if (!$resultado['estado']) $erros[] = $resultado['mensagem'];
         }
