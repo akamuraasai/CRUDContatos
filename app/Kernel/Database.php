@@ -42,7 +42,7 @@ class Database
 
     public function inserir($campos = '', $parametros = '', $valores = null)
     {
-        $query = "INSERT INTO $this->tabela ({$campos}) VALUES ({$parametros})";
+        $query = "INSERT INTO $this->tabela ({$campos}) VALUES ({$parametros});";
         try {
             $resultado = $this->con->prepare($query);
             foreach ($valores as $key => $valor)

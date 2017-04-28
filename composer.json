@@ -14,6 +14,16 @@
             "App\\": "app/"
         }
     },
+    "scripts": {
+        "db_up": "App\\Database\\Migrations\\BaseMigration::up",
+        "db_down": "App\\Database\\Migrations\\BaseMigration::down",
+        "make_seed": "App\\Database\\Seeders\\BaseSeed::make_seed",
+        "post-update-cmd": [
+            "App\\Database\\Migrations\\BaseMigration::up",
+            "App\\Database\\Seeders\\BaseSeed::make_seed"
+        ]
+    },
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+    }
 }

@@ -20,12 +20,12 @@ class ContatoController extends Controller
 
     public function lista()
     {
-        return $this->repo->listarContatos();
+        return $this->repo->listar_contatos();
     }
 
     public function buscaId($id)
     {
-        return $this->repo->buscarContatoPorId($id);
+        return $this->repo->buscar_contato_por_id($id);
     }
 
     public function salva($request = null)
@@ -35,7 +35,7 @@ class ContatoController extends Controller
             return json_encode($valida['erros']);
 
         if (isset($request['id']))
-            $model = Contato::buscarPorId($request['id']);
+            $model = Contato::buscar_por_id($request['id']);
         else
             $model = new Contato();
 
@@ -50,7 +50,7 @@ class ContatoController extends Controller
             return json_encode(['resultado' => false, 'mensagem' => 'Execução incorreta do método.']);
 
         if (isset($request['id']))
-            $model = Contato::buscarPorId($request['id']);
+            $model = Contato::buscar_por_id($request['id']);
         else
             return json_encode(['resultado' => false, 'mensagem' => 'Execução do método com parametros incorretos.']);
 

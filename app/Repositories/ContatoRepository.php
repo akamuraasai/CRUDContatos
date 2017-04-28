@@ -10,19 +10,19 @@ class ContatoRepository extends Repository
         $this->tabela = 'contatos';
     }
 
-    public function listarContatos()
+    public function listar_contatos()
     {
         return $this->listar();
     }
 
-    public function buscarContatoPorId($id)
+    public function buscar_contato_por_id($id)
     {
         return $this->listar('*', 'id = ?', [$id]);
     }
 
-    public function salvarContato($model)
+    public function salvar_contato($model)
     {
-        if ($model->getId() === null) {
+        if ($model->get_id() === null) {
             $campos = 'nome';
             $parametros = '?';
             $valores = [$model->nome];
@@ -34,16 +34,16 @@ class ContatoRepository extends Repository
 
         $set = 'nome = ?';
         $where = 'id = ?';
-        $valores = [$model->nome, $model->getId()];
+        $valores = [$model->nome, $model->get_id()];
         return $this->alterar($set, $where, $valores) ?
             ['resultado' => true, 'mensagem' => 'Contato alterado com sucesso.'] :
             ['resultado' => false, 'mensagem' => 'Erro ao alterar contato.'];
     }
 
-    public function excluirContato($model)
+    public function excluir_contato($model)
     {
         $where = 'id = ?';
-        $valores = [$model->getId()];
+        $valores = [$model->get_id()];
         return $this->excluir($where, $valores) ?
             ['resultado' => true, 'mensagem' => 'Contato excluído com sucesso.'] :
             ['resultado' => false, 'mensagem' => 'Erro ao excluir contato.'];

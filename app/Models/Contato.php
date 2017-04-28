@@ -17,10 +17,10 @@ class Contato extends Model
         $this->repo = new ContatoRepository();
     }
 
-    static public function buscarPorId($id)
+    static public function buscar_por_id($id)
     {
         $repo = new ContatoRepository();
-        $array = json_decode($repo->buscarContatoPorId($id));
+        $array = json_decode($repo->buscar_contato_por_id($id));
         if (count($array) == 0) {
             echo json_encode(['resultado' => false, 'mensagem' => 'Contato não encontrado.']);
             die();
@@ -32,18 +32,18 @@ class Contato extends Model
         return $retorno;
     }
 
-    public function getId()
+    public function get_id()
     {
         return $this->id;
     }
 
     public function salvar()
     {
-        return json_encode($this->repo->salvarContato($this));
+        return json_encode($this->repo->salvar_contato($this));
     }
 
     public function deletar()
     {
-        return json_encode($this->repo->excluirContato($this));
+        return json_encode($this->repo->excluir_contato($this));
     }
 }
