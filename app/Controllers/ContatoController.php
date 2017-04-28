@@ -13,7 +13,7 @@ class ContatoController extends Controller
         $this->repo = new ContatoRepository();
     }
 
-    static public function index()
+    public function index()
     {
         include(__DIR__ .'/../../resources/views/contatos/index.php');
         return '';
@@ -31,6 +31,9 @@ class ContatoController extends Controller
 
     public function salva($request = null)
     {
+        if (isset($request['item']))
+            $request = $request['item'];
+
         $valida = $this->model->valida_request($request);
         if (!$valida['resultado'])
             return json_encode($valida['erros']);

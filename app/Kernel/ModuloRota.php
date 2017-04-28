@@ -37,7 +37,10 @@ class ModuloRota
             else if (preg_match("#^/{$principal}$#", $uri) &&
                      $metodo === $rota['metodo']) {
                 if ($metodo === 'POST')
-                    return $this->chamada($rota['chamada'], $rota['uri'], $_REQUEST);
+                    return $this->chamada($rota['chamada'], $rota['uri'],
+                                         ($_REQUEST == null ?
+                                          json_decode(file_get_contents('php://input'),true) :
+                                          $_REQUEST));
 
                 return $this->chamada($rota['chamada'], $rota['uri']);
             }

@@ -24,9 +24,10 @@ class Database
         }
     }
 
-    public function listar($campos = '*', $where_campos = '', $where_valores = null)
+    public function listar($campos = '*', $where_campos = '', $where_valores = null, $joins = null, $coluna_join = '')
     {
-        $query = "SELECT {$campos} FROM {$this->tabela}" . ($where_campos == '' ? '' : " WHERE {$where_campos}");
+        $query = "SELECT {$campos} FROM {$this->tabela}" .
+                 ($where_campos == '' ? '' : " WHERE {$where_campos} ");
         $resultado = $this->con->prepare($query);
         if ($where_valores != null) {
             foreach ($where_valores as $key => $valor) {
@@ -35,8 +36,15 @@ class Database
         }
 
         if ($resultado->execute()) {
-            $retorno = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($retorno);;
+            $retorno = [];
+            while (($row = $resultado->fetch(PDO::FETCH_ASSOC)) !== false) {
+                if ($joins != '') {
+                    foreach ($joins as $join)
+                        $row[$join] = $this->join('*', $join, "{$coluna_join} = ?", [$row['id']]);
+                }
+                $retorno[] = $row;
+            }
+            return json_encode($retorno);
         }
     }
 
@@ -92,5 +100,18 @@ class Database
         }
 
         return false;
+    }
+
+    private function join($campos = '*', $tabela = '', $where_campos = '', $where_valores = null)
+    {
+        $query = "SELECT {$campos} FROM {$tabela} WHERE {$where_campos}";
+        $resultado = $this->con->prepare($query);
+        foreach ($where_valores as $key => $valor)
+            $resultado->bindParam($key + 1, $valor);
+
+        if ($resultado->execute()) {
+            $retorno = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return $retorno;
+        }
     }
 }

@@ -2,13 +2,13 @@
 $titulo = 'Contatos';
 
 $conteudo = '
-    <div class="container">
+    <div class="container" ng-app="mainApp" ng-controller="mainCtrl">
         ' .file_get_contents(__DIR__ . "/lista.php"). '
         ' .file_get_contents(__DIR__ . "/form.php"). '
     </div>
 ';
 
 $js_especifico = '
-    <script></script>
+    <script src="/js/contatos.js" type="text/javascript"></script>
 ';
 require(__DIR__ . '/../layouts/main.php');

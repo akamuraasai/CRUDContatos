@@ -12,7 +12,7 @@ class ContatoRepository extends Repository
 
     public function listar_contatos()
     {
-        return $this->listar();
+        return $this->listar('*', '', null, ['emails', 'telefones'], 'contato_id');
     }
 
     public function buscar_contato_por_id($id)

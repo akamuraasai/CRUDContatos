@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/sweetalert.css" rel="stylesheet" type="text/css" />
     <style>
         body {
             padding-top: 70px;
@@ -19,6 +20,9 @@
         .panel-heading span {
             margin-top: -1em;
             font-size: 15px;
+        }
+        .pagination {
+            margin: 0;
         }
     </style>
 
