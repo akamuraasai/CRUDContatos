@@ -1,0 +1,19 @@
+{
+    "name": "akamuraasai/teste_mediapost",
+    "description": "Teste para vaga PHP da empresa Media Post",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Willian",
+            "email": "jonathan.willian.tod@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
