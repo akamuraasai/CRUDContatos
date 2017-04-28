@@ -22,3 +22,12 @@ $rotas->adiciona('GET', '/email-buscar/{id}', 'App\Controllers\EmailController@b
 $rotas->adiciona('POST', '/email-salvar', 'App\Controllers\EmailController@salva');
 $rotas->adiciona('POST', '/email-deletar', 'App\Controllers\EmailController@deleta');
 //=========================================================================================
+
+//=========================================================================================
+// Rotas de Telefone
+//=========================================================================================
+$rotas->adiciona('GET', '/fone-listar', 'App\Controllers\TelefoneController@lista');
+$rotas->adiciona('GET', '/fone-buscar/{id}', 'App\Controllers\TelefoneController@busca_id');
+$rotas->adiciona('POST', '/fone-salvar', 'App\Controllers\TelefoneController@salva');
+$rotas->adiciona('POST', '/fone-deletar', 'App\Controllers\TelefoneController@deleta');
+//=========================================================================================

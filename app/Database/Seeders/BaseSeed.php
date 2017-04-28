@@ -75,11 +75,17 @@ class BaseSeed extends Database
             else if ($tipo === 'num2')
                 $retorno[] = mt_rand(1, 2);
 
+            else if ($tipo === 'num3')
+                $retorno[] = mt_rand(1, 3);
+
             else if ($tipo === 'id')
                 $retorno[] = mt_rand(1, 15);
 
             else if ($tipo === 'email')
                 $retorno[] = strtolower($this->nomes[mt_rand(0, count($this->nomes) -1)]) . '@mail.com.br';
+
+            else if ($tipo === 'fone')
+                $retorno[] = '(' .mt_rand(11, 49). ') '. mt_rand(10000, 99999). '-' .mt_rand(1000, 9999);
         }
 
         return $retorno;
@@ -89,8 +95,10 @@ class BaseSeed extends Database
     {
         $contatos = new ContatoSeeder();
         $emails = new EmailSeeder();
+        $fones = new TelefoneSeeder();
 
         $contatos->contato_seed();
         $emails->email_seed();
+        $fones->telefone_seed();
     }
 }
