@@ -27,7 +27,16 @@ class ContatoRepository extends Repository
             $parametros = '?';
             $valores = [$model->nome];
 
-            return $this->inserir($campos, $parametros, $valores) ?
+
+            $resultado = $this->inserir($campos, $parametros, $valores, true);
+            if (isset($resultado['resultado'])) {
+                if ($resultado['resultado'])
+                    $model->set_id($resultado['id']);
+
+                $resultado = $resultado['resultado'];
+            }
+
+            return $resultado ?
                 ['resultado' => true, 'mensagem' => 'Contato inserido com sucesso.'] :
                 ['resultado' => false, 'mensagem' => 'Erro ao inserir contato.'];
         }

@@ -19,7 +19,7 @@ class Model
             if (!$resultado['estado']) $erros[] = $resultado['mensagem'];
         }
         if (count($erros) > 0)
-            return ['resultado' => false, 'erros' => $erros];
+            return ['resultado' => false, 'mensagem' => $erros];
 
         return ['resultado' => true];
     }
@@ -31,11 +31,20 @@ class Model
         if (isset($campo['requerido']) && $campo['requerido'] && $indice === false)
             return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} é obrigatório."];
 
-        if (isset($campo['min']) && strlen($request[$chaves[$indice]]) < $campo['min'])
-            return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no minimo {$campo['min']} caracteres."];
+        if (isset($campo['associacao']) && $campo['associacao']) {
+            if (isset($campo['min']) && count($request[$chaves[$indice]]) < $campo['min'])
+                return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no minimo {$campo['min']} itens."];
 
-        if (isset($campo['max']) && strlen($request[$chaves[$indice]]) > $campo['max'])
-            return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no maximo {$campo['max']} caracteres."];
+            if (isset($campo['max']) && count($request[$chaves[$indice]]) > $campo['max'])
+                return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no maximo {$campo['max']} itens."];
+
+        } else {
+            if (isset($campo['min']) && strlen($request[$chaves[$indice]]) < $campo['min'])
+                return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no minimo {$campo['min']} caracteres."];
+
+            if (isset($campo['max']) && strlen($request[$chaves[$indice]]) > $campo['max'])
+                return ['estado' => false, 'mensagem' => "Campo {$campo['nome']} deve conter no maximo {$campo['max']} caracteres."];
+        }
 
         return ['estado' => true];
     }

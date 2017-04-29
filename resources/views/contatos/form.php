@@ -147,7 +147,10 @@
                     <button type="submit" class="btn btn-default" ng-click="cancelar()">
                         Cancelar
                     </button>
-                    <button type="submit" class="btn btn-primary" ng-click="confirma(item, 3)">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            ng-click="confirma(item, 3)"
+                            ng-disabled="item.emails.length <= 0 || item.telefones.length <= 0">
                         <i class="fa fa-save"></i>
                         Salvar Contato
                     </button>

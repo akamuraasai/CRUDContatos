@@ -7,6 +7,7 @@ class ContatosCrud extends CrudBase {
 
         this.scope.url_base = '/';
         this.scope.first_field = '#nome';
+        this.novo_item = {telefones: [], emails: []};
         this.scope.lista();
         this.scope.tipoEmail = this.tipoEmail;
         this.scope.tipoTelefone = this.tipoTelefone;

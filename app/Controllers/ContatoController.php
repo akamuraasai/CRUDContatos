@@ -36,7 +36,7 @@ class ContatoController extends Controller
 
         $valida = $this->model->valida_request($request);
         if (!$valida['resultado'])
-            return json_encode($valida['erros']);
+            return json_encode($valida);
 
         if (isset($request['id']))
             $model = Contato::buscar_por_id($request['id']);
@@ -45,7 +45,28 @@ class ContatoController extends Controller
 
         $model->nome = $request['nome'];
 
-        return $model->salvar();
+        $retorno = json_decode($model->salvar());
+        foreach ($request['telefones'] as $telefone) {
+            $telefone['contato_id'] = $model->get_id();
+            $telController = new TelefoneController();
+            $resultado = json_decode($telController->salva($telefone));
+            if (!$resultado->resultado) {
+                $retorno->resultado = false;
+                $retorno->mensagem .= '\n' .implode("<br>", $resultado->mensagem);
+            }
+        }
+
+        foreach ($request['emails'] as $email) {
+            $email['contato_id'] = $model->get_id();
+            $emailController = new EmailController();
+            $resultado = json_decode($emailController->salva($email));
+            if (!$resultado->resultado) {
+                $retorno->resultado = false;
+                $retorno->mensagem .= '\n' .implode("<br>", $resultado->mensagem);
+            }
+        }
+
+        return json_encode($retorno);
     }
 
     public function deleta($request = null)

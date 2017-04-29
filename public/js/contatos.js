@@ -95,6 +95,7 @@ var ContatosCrud = function (_CrudBase) {
 
         _this.scope.url_base = '/';
         _this.scope.first_field = '#nome';
+        _this.novo_item = { telefones: [], emails: [] };
         _this.scope.lista();
         _this.scope.tipoEmail = _this.tipoEmail;
         _this.scope.tipoTelefone = _this.tipoTelefone;
@@ -34192,6 +34193,7 @@ var CrudBase = function () {
 
         this.scope.itens = [];
         this.scope.item = {};
+        this.novo_item = {};
         this.scope.aux_item = {};
         this.scope.aux_lista = [];
         this.scope.paginator = {
@@ -34224,7 +34226,6 @@ var CrudBase = function () {
         key: 'visualizar',
         value: function visualizar(item) {
             this.scope.aux_item = item;
-            console.log('as');
             $('#visualizarContato').modal('show');
         }
     }, {
@@ -34232,7 +34233,7 @@ var CrudBase = function () {
         value: function novo() {
             var _this = this;
 
-            this.scope.item = {};
+            this.scope.item = jQuery.extend(true, {}, this.novo_item);
             this.collapse('#btn_lista', false);
             this.collapse('#btn_form', true);
             setTimeout(function () {
@@ -34255,9 +34256,13 @@ var CrudBase = function () {
     }, {
         key: 'cancelar',
         value: function cancelar() {
-            this.scope.item = {};
-            this.collapse('#btn_lista', true);
-            this.collapse('#btn_form', false);
+            var aceita = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+            if (aceita) {
+                this.scope.item = {};
+                this.collapse('#btn_lista', true);
+                this.collapse('#btn_form', false);
+            }
         }
     }, {
         key: 'collapse',
@@ -34365,17 +34370,19 @@ var CrudBase = function () {
         }
     }, {
         key: 'mensagem',
-        value: function mensagem(confirm, _mensagem) {
+        value: function mensagem(confirm, msg) {
             var _this5 = this;
 
             var acao = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
             var filho = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-            if (confirm) swal(_mensagem, function (confirmacao) {
+            if (msg.prop && msg.prop.constructor === Array) msg = msg.join("\n");
+
+            if (confirm) swal(msg, function (confirmacao) {
                 if (confirmacao) {
                     if (acao == 1) _this5.remove(_this5.scope.aux_item.id);else if (acao == 2) _this5.remove(_this5.scope.aux_item.id, filho);else if (acao == 3) _this5.salva(_this5.scope.item);
                 }
-            });else swal("Resultado da operação", _mensagem, "info");
+            });else swal("Resultado da operação", msg, "info");
         }
     }, {
         key: 'requisicao',
@@ -34385,7 +34392,7 @@ var CrudBase = function () {
             var funcao = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
             this.http(req).then(function (data) {
-                if (funcao != null) funcao();
+                if (funcao != null) funcao(data.data.resultado);
                 setTimeout(function () {
                     return _this6.mensagem(false, data.data.mensagem);
                 }, 100);

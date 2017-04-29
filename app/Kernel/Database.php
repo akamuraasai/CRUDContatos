@@ -48,7 +48,7 @@ class Database
         }
     }
 
-    public function inserir($campos = '', $parametros = '', $valores = null)
+    public function inserir($campos = '', $parametros = '', $valores = null, $retorna_id = false)
     {
         $query = "INSERT INTO $this->tabela ({$campos}) VALUES ({$parametros});";
         try {
@@ -57,6 +57,9 @@ class Database
                 $resultado->bindParam($key + 1, $valores[$key]);
 
             $resultado->execute();
+
+            if ($retorna_id)
+                return ['resultado' => true, 'id' => $this->con->lastInsertId()];
 
             return true;
         } catch (\Exception $e) {

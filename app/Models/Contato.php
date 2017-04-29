@@ -12,7 +12,9 @@ class Contato extends Model
     public function __construct()
     {
         $this->validacoes = [
-            ['nome' => 'nome', 'requerido' => true, 'min' => 6, 'max' => 250]
+            ['nome' => 'nome', 'requerido' => true, 'min' => 6, 'max' => 250],
+            ['nome' => 'telefones', 'requerido' => true, 'min' => 1, 'associacao' => true],
+            ['nome' => 'emails', 'requerido' => true, 'min' => 1, 'associacao' => true]
         ];
         $this->repo = new ContatoRepository();
     }
@@ -35,6 +37,11 @@ class Contato extends Model
     public function get_id()
     {
         return $this->id;
+    }
+
+    public function set_id($id)
+    {
+        $this->id = $id;
     }
 
     public function salvar()

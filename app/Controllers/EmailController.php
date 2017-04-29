@@ -27,7 +27,7 @@ class EmailController extends Controller
     {
         $valida = $this->model->valida_request($request);
         if (!$valida['resultado'])
-            return json_encode($valida['erros']);
+            return json_encode($valida);
 
         if (isset($request['id']))
             $model = Email::buscar_por_id($request['id']);

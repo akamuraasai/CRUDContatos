@@ -5,6 +5,7 @@ export default class CrudBase {
 
         this.scope.itens = [];
         this.scope.item = {};
+        this.novo_item = {};
         this.scope.aux_item = {};
         this.scope.aux_lista = [];
         this.scope.paginator = {
@@ -35,12 +36,11 @@ export default class CrudBase {
 
     visualizar(item) {
         this.scope.aux_item = item;
-        console.log('as');
         $('#visualizarContato').modal('show');
     }
 
     novo() {
-        this.scope.item = {};
+        this.scope.item = jQuery.extend(true, {}, this.novo_item);
         this.collapse('#btn_lista', false);
         this.collapse('#btn_form', true);
         setTimeout(() => {
@@ -58,10 +58,12 @@ export default class CrudBase {
         }, 100);
     }
 
-    cancelar() {
-        this.scope.item = {};
-        this.collapse('#btn_lista', true);
-        this.collapse('#btn_form', false);
+    cancelar(aceita = true) {
+        if (aceita) {
+            this.scope.item = {};
+            this.collapse('#btn_lista', true);
+            this.collapse('#btn_form', false);
+        }
     }
 
     collapse(elemento, estado) {
@@ -151,9 +153,12 @@ export default class CrudBase {
         this.mensagem(true, msg, acao, filho);
     }
 
-    mensagem(confirm, mensagem, acao = null, filho = null) {
+    mensagem(confirm, msg, acao = null, filho = null) {
+        if (msg.prop && msg.prop.constructor === Array)
+            msg = msg.join("\n");
+
         if (confirm)
-            swal(mensagem,
+            swal(msg,
                 confirmacao => {
                     if (confirmacao){
                         if (acao == 1)
@@ -165,13 +170,13 @@ export default class CrudBase {
                     }
                 });
         else
-            swal("Resultado da operação", mensagem, "info");
+            swal("Resultado da operação", msg, "info");
     }
 
     requisicao(req, refresh, funcao = null) {
         this.http(req)
             .then(data => {
-                    if (funcao != null) funcao();
+                    if (funcao != null) funcao(data.data.resultado);
                     setTimeout(() => this.mensagem(false, data.data.mensagem), 100);
                     if (refresh && !this.self_model)
                         this.lista();
