@@ -34200,6 +34200,7 @@ var CrudBase = function () {
             busca: ''
         };
 
+        this.visualizar = this.visualizar.bind(this);
         this.lista = this.lista.bind(this);
         this.novo = this.novo.bind(this);
         this.edita = this.edita.bind(this);
@@ -34209,6 +34210,7 @@ var CrudBase = function () {
         this.cancelar = this.cancelar.bind(this);
         this.removeFilho = this.removeFilho.bind(this);
 
+        this.scope.visualizar = this.visualizar;
         this.scope.novo = this.novo;
         this.scope.edita = this.edita;
         this.scope.lista = this.lista;
@@ -34219,6 +34221,13 @@ var CrudBase = function () {
     }
 
     _createClass(CrudBase, [{
+        key: 'visualizar',
+        value: function visualizar(item) {
+            this.scope.aux_item = item;
+            console.log('as');
+            $('#visualizarContato').modal('show');
+        }
+    }, {
         key: 'novo',
         value: function novo() {
             var _this = this;

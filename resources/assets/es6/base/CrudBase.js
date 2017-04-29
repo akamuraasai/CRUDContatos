@@ -13,6 +13,7 @@ export default class CrudBase {
             busca: ''
         };
 
+        this.visualizar = this.visualizar.bind(this);
         this.lista = this.lista.bind(this);
         this.novo = this.novo.bind(this);
         this.edita = this.edita.bind(this);
@@ -22,6 +23,7 @@ export default class CrudBase {
         this.cancelar = this.cancelar.bind(this);
         this.removeFilho = this.removeFilho.bind(this);
 
+        this.scope.visualizar = this.visualizar;
         this.scope.novo = this.novo;
         this.scope.edita = this.edita;
         this.scope.lista = this.lista;
@@ -29,6 +31,12 @@ export default class CrudBase {
         this.scope.confirma = this.confirma;
         this.scope.mensagem = this.mensagem;
         this.scope.cancelar = this.cancelar;
+    }
+
+    visualizar(item) {
+        this.scope.aux_item = item;
+        console.log('as');
+        $('#visualizarContato').modal('show');
     }
 
     novo() {
