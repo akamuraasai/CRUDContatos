@@ -177,6 +177,9 @@ export default class CrudBase {
         this.http(req)
             .then(data => {
                     if (funcao != null) funcao(data.data.resultado);
+                    if (!data.data.resultado && data.data.id != undefined)
+                        this.scope.item.id = data.data.id;
+
                     setTimeout(() => this.mensagem(false, data.data.mensagem), 100);
                     if (refresh && !this.self_model)
                         this.lista();

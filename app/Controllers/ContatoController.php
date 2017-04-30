@@ -52,7 +52,7 @@ class ContatoController extends Controller
             $resultado = json_decode($telController->salva($telefone));
             if (!$resultado->resultado) {
                 $retorno->resultado = false;
-                $retorno->mensagem .= '\n' .implode("<br>", $resultado->mensagem);
+                $retorno->mensagem .= "\n" .implode("\n", $resultado->mensagem);
             }
         }
 
@@ -62,9 +62,12 @@ class ContatoController extends Controller
             $resultado = json_decode($emailController->salva($email));
             if (!$resultado->resultado) {
                 $retorno->resultado = false;
-                $retorno->mensagem .= '\n' .implode("<br>", $resultado->mensagem);
+                $retorno->mensagem .= "\n" .implode("\n", $resultado->mensagem);
             }
         }
+
+        if (!$retorno->resultado)
+            $retorno->id = $model->get_id();
 
         return json_encode($retorno);
     }

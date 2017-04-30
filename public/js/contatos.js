@@ -34393,6 +34393,8 @@ var CrudBase = function () {
 
             this.http(req).then(function (data) {
                 if (funcao != null) funcao(data.data.resultado);
+                if (!data.data.resultado && data.data.id != undefined) _this6.scope.item.id = data.data.id;
+
                 setTimeout(function () {
                     return _this6.mensagem(false, data.data.mensagem);
                 }, 100);

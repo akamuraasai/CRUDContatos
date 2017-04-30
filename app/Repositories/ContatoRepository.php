@@ -27,7 +27,6 @@ class ContatoRepository extends Repository
             $parametros = '?';
             $valores = [$model->nome];
 
-
             $resultado = $this->inserir($campos, $parametros, $valores, true);
             if (isset($resultado['resultado'])) {
                 if ($resultado['resultado'])
